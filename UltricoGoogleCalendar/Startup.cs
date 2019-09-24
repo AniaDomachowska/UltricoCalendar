@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using UltricoGoogleCalendar.DataLayer.Model;
+using UltricoGoogleCalendar.Model;
 
 namespace UltricoGoogleCalendar
 {
@@ -26,6 +29,14 @@ namespace UltricoGoogleCalendar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Event, EventCreateModel>().ReverseMap();
+                cfg.CreateMap<Event, EventUpdateModel>().ReverseMap();
+            });
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
