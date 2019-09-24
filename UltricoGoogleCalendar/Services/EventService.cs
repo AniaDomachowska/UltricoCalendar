@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using UltricoGoogleCalendar.DataLayer.Model;
 using UltricoGoogleCalendar.DataLayer.Repositories;
 using UltricoGoogleCalendar.Model;
-using Model_Event = UltricoGoogleCalendar.Model.EventModel;
 
 namespace UltricoGoogleCalendar.Services
 {
@@ -16,15 +16,15 @@ namespace UltricoGoogleCalendar.Services
             this.mapper = mapper;
         }
 
-        public void Create(Model_Event model)
+        public void Create(EventCreateModel createModel)
         {
-            var eventEntity = mapper.Map<Event>(model);
+            var eventEntity = mapper.Map<Event>(createModel);
             eventRepository.Add(eventEntity);
         }
 
-        public void Update(Model_Event model)
+        public void Update(EventUpdateModel createModel)
         {
-            var eventEntity = mapper.Map<Event>(model);
+            var eventEntity = mapper.Map<Event>(createModel);
             eventRepository.Save(eventEntity);
         }
     }

@@ -1,6 +1,6 @@
-﻿namespace UltricoGoogleCalendar.DataLayer.Model
+﻿namespace UltricoGoogleCalendar.Model
 {
-    public class Event
+    public class EventUpdateModel
     {
         public string Title { get; set; }
         public string Description { get; set; }

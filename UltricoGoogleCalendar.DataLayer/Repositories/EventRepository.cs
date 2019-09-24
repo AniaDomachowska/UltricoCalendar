@@ -1,4 +1,4 @@
-﻿using UltricoGoogleCalendar.Model;
+﻿using UltricoGoogleCalendar.DataLayer.Model;
 
 namespace UltricoGoogleCalendar.DataLayer.Repositories
 {
