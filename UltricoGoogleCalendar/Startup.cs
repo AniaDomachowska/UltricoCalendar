@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using UltricoGoogleCalendar.DataLayer.Model;
+using UltricoGoogleCalendar.DataLayer.Repositories;
 using UltricoGoogleCalendar.Model;
+using UltricoGoogleCalendar.Services;
 
 namespace UltricoGoogleCalendar
 {
@@ -31,16 +27,11 @@ namespace UltricoGoogleCalendar
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Event, EventCreateModel>().ReverseMap();
-                cfg.CreateMap<Event, EventUpdateModel>().ReverseMap();
-            });
-
-            var mapper = config.CreateMapper();
-            services.AddSingleton(mapper);
-            services.AddHangfire(configuration => { configuration.UseNLogLogProvider(); });
+            services.AddSingleton(AutoMapperConfig.Create());
+            services.AddHangfire(configuration => { configuration.UseMemoryStorage();});
             services.AddHangfireServer();
+            services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IEventRepository, EventRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
