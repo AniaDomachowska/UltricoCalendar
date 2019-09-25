@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using UltricoGoogleCalendar.DataLayer.Model;
 using UltricoGoogleCalendar.DataLayer.Repositories;
 using UltricoGoogleCalendar.Model;
@@ -26,6 +28,13 @@ namespace UltricoGoogleCalendar.Services
         {
             var eventEntity = mapper.Map<Event>(createModel);
             eventRepository.Save(eventEntity);
+        }
+
+        public IEnumerable<EventResource> GetAll()
+        {
+            return eventRepository
+                .GetAll()
+                .Select(mapper.Map<EventResource>);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UltricoGoogleCalendar.Model;
+﻿using System.Collections.Generic;
+using UltricoGoogleCalendar.Model;
 
 namespace UltricoGoogleCalendar.Services
 {
@@ -6,5 +7,6 @@ namespace UltricoGoogleCalendar.Services
     {
         void Create(EventCreateModel createModel);
         void Update(EventUpdateModel updateModel);
+        IEnumerable<EventResource> GetAll();
     }
 }

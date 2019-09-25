@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using UltricoGoogleCalendar.Model;
 using UltricoGoogleCalendar.Services;
 
 namespace UltricoGoogleCalendar.Controllers
 {
+    [Route("/events")]
     public class EventsController : Controller
     {
         private readonly IEventService eventService;
@@ -13,6 +15,13 @@ namespace UltricoGoogleCalendar.Controllers
             this.eventService = eventService;
         }
 
+        [HttpGet]
+        public IEnumerable<EventResource> Get()
+        {
+            return eventService.GetAll();
+        }
+
+        [HttpPost]
         public OperationResult Create(EventCreateModel model)
         {
             eventService.Create(model);
@@ -20,6 +29,7 @@ namespace UltricoGoogleCalendar.Controllers
             return OperationResult.OkResult;
         }
 
+        [HttpPut]
         public OperationResult Update(EventUpdateModel model)
         {
             eventService.Update(model);
