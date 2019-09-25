@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,8 +36,11 @@ namespace UltricoGoogleCalendar
                 cfg.CreateMap<Event, EventCreateModel>().ReverseMap();
                 cfg.CreateMap<Event, EventUpdateModel>().ReverseMap();
             });
+
             var mapper = config.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddHangfire(configuration => { configuration.UseNLogLogProvider(); });
+            services.AddHangfireServer();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,8 @@ namespace UltricoGoogleCalendar
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
         }
     }
 }
