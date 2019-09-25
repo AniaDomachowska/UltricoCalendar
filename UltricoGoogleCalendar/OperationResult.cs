@@ -1,4 +1,4 @@
-﻿namespace UltricoGoogleCalendar.Controllers
+﻿namespace UltricoGoogleCalendar
 {
     public class OperationResult
     {
@@ -6,7 +6,9 @@
 
         public OperationResult(string code)
         {
-            throw new System.NotImplementedException();
+            this.Code = code;
         }
+
+        public string Code { get; }
     }
 }

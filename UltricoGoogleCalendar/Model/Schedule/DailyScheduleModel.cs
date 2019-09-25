@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UltricoGoogleCalendar.Model
+namespace UltricoGoogleCalendar.Model.Schedule
 {
     public class DailyScheduleModel
     {

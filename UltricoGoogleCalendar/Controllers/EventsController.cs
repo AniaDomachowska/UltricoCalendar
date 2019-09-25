@@ -5,7 +5,7 @@ using UltricoGoogleCalendar.Services;
 
 namespace UltricoGoogleCalendar.Controllers
 {
-    [Route("/events")]
+    [Route("/api/events")]
     public class EventsController : Controller
     {
         private readonly IEventService eventService;

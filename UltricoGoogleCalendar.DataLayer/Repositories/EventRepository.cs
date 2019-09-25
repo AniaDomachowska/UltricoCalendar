@@ -5,20 +5,22 @@ using UltricoGoogleCalendar.DataLayer.Model;
 
 namespace UltricoGoogleCalendar.DataLayer.Repositories
 {
-    public class EventRepository
+    public class EventRepository : IEventRepository
     {
+        List<Event> eventList = new List<Event>();
+
         public void Add(Event entity)
         {
+            eventList.Add(entity);
         }
 
         public void Save(Event entity)
         {
-            
         }
 
         public IEnumerable<Event> GetAll()
         {
-            return null;
+            return eventList;
         }
     }
 }

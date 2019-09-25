@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UltricoGoogleCalendar.Model
+namespace UltricoGoogleCalendar.Model.Schedule
 {
     public class WeeklyScheduleModel
     {

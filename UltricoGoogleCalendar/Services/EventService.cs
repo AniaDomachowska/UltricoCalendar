@@ -9,10 +9,10 @@ namespace UltricoGoogleCalendar.Services
 {
     public class EventService : IEventService
     {
-        private readonly EventRepository eventRepository;
+        private readonly IEventRepository eventRepository;
         private readonly IMapper mapper;
 
-        public EventService(EventRepository eventRepository, IMapper mapper)
+        public EventService(IEventRepository eventRepository, IMapper mapper)
         {
             this.eventRepository = eventRepository;
             this.mapper = mapper;
