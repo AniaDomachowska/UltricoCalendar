@@ -1,4 +1,4 @@
-﻿namespace UltricoGoogleCalendar.Model
+﻿namespace UltricoGoogleCalendar.DataLayer.Enums
 {
     public enum ScheduleTypeEnum
     {
