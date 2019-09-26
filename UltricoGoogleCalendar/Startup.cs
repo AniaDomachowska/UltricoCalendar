@@ -31,9 +31,12 @@ namespace UltricoGoogleCalendar
             services.AddHangfire(configuration => { configuration.UseMemoryStorage(); });
             services.AddHangfireServer();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<ISchedulerService, SchedulerService>();
+            services.AddTransient<ICronExpressionFactory, CronExpressionFactory>();
             var databaseContext = new DatabaseContext();
 
             databaseContext.Database.Migrate();
+
             services.AddSingleton<IEventRepository>(new EventRepository(databaseContext));
 
         }

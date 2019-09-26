@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using UltricoGoogleCalendar.Model;
 using UltricoGoogleCalendar.Services;
@@ -21,8 +22,14 @@ namespace UltricoGoogleCalendar.Controllers
             return eventService.GetAll();
         }
 
+        [Route("{id}")]
+        public EventResource GetById(int id, [FromQuery] Guid? occurenceId)
+        {
+            return eventService.GetOne(id, occurenceId);
+        }
+
         [HttpPost]
-        public OperationResult Create([FromBody]EventCreateModel model)
+        public OperationResult Create([FromBody] EventCreateModel model)
         {
             eventService.Create(model);
 
@@ -30,11 +37,24 @@ namespace UltricoGoogleCalendar.Controllers
         }
 
         [HttpPut]
-        public OperationResult Update(EventUpdateModel model)
+        [Route("{id}")]
+        public OperationResult Update(int id, [FromBody] EventUpdateModel model)
         {
-            eventService.Update(model);
+            int[] test = {1, 2, 3};
 
-            return OperationResult.OkResult;
+            var list = test as IList<int>;
+            Guid? occurenceId = null;
+
+            if (model.EditSingleEvent)
+            {
+                occurenceId = eventService.CreateOccurence(id, model);
+            }
+            else
+            {
+                eventService.Update(id, model);
+            }
+
+            return OperationResult.CreateOkResult(occurenceId);
         }
     }
 }

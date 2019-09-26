@@ -25,6 +25,10 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<Guid>("OccurenceId");
+
+                    b.Property<int?>("ParentEventId");
+
                     b.Property<int?>("ScheduleId");
 
                     b.Property<string>("Title");
@@ -32,6 +36,8 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
                     b.Property<DateTime>("Updated");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentEventId");
 
                     b.HasIndex("ScheduleId");
 
@@ -74,6 +80,10 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
 
             modelBuilder.Entity("UltricoGoogleCalendar.DataLayer.Model.Event", b =>
                 {
+                    b.HasOne("UltricoGoogleCalendar.DataLayer.Model.Event", "ParentEvent")
+                        .WithMany()
+                        .HasForeignKey("ParentEventId");
+
                     b.HasOne("UltricoGoogleCalendar.DataLayer.Model.Schedule", "Schedule")
                         .WithMany()
                         .HasForeignKey("ScheduleId");

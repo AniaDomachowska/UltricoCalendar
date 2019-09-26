@@ -6,4 +6,13 @@ namespace UltricoGoogleCalendar.Services
     {
         CronResult Generate(ScheduleModel schedule);
     }
+
+    public class CronExpressionFactory : ICronExpressionFactory
+    {
+        public CronResult Generate(ScheduleModel schedule)
+        {
+            // TODO: Implement cron expressions.
+            return new CronResult();
+        }
+    }
 }

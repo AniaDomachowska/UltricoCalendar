@@ -41,11 +41,19 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
                     Updated = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    ScheduleId = table.Column<int>(nullable: true)
+                    ScheduleId = table.Column<int>(nullable: true),
+                    ParentEventId = table.Column<int>(nullable: true),
+                    OccurenceId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Events_Events_ParentEventId",
+                        column: x => x.ParentEventId,
+                        principalTable: "Events",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Events_Schedule_ScheduleId",
                         column: x => x.ScheduleId,
@@ -53,6 +61,11 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_ParentEventId",
+                table: "Events",
+                column: "ParentEventId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_ScheduleId",

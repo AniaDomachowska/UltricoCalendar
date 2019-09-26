@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UltricoGoogleCalendar.DataLayer.Model;
 
@@ -26,6 +27,13 @@ namespace UltricoGoogleCalendar.DataLayer.Repositories
         public void Commit()
         {
             dbContext.SaveChanges();
+        }
+
+        public Event GetOne(int id, Guid? occurenceId)
+        {
+            return dbContext.Events.FirstOrDefault(element =>
+                element.Id == id && (occurenceId == null ||
+                                     element.OccurenceId == occurenceId));
         }
 
         public IEnumerable<Event> GetAll()

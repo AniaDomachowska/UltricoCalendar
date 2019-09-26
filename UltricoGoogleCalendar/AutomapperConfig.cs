@@ -18,12 +18,14 @@ namespace UltricoGoogleCalendar
                 cfg.CreateMap<EventUpdateModel, Event>()
                     .ForMember(dest => dest.Schedule, opt => opt.MapFrom(src => src.Schedule))
                     .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                    .ForMember(dest => dest.OccurenceId, opt => opt.MapFrom(src => src.OccurenceId));
 
                 cfg.CreateMap<Event, EventResource>()
                     .ForMember(dest => dest.Schedule, opt => opt.MapFrom(src => src.Schedule))
                     .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                    .ForMember(dest => dest.OccurenceId, opt => opt.MapFrom(src => src.OccurenceId));
 
                 cfg.CreateMap<ScheduleModel, Schedule>().ReverseMap();
             });
