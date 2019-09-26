@@ -6,6 +6,7 @@ namespace UltricoGoogleCalendar.DataLayer.Model
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public bool WholeDayEvent { get; set; }
         public Schedule Schedule { get; set; }
         public Event ParentEvent { get; set; }
         public Guid OccurenceId { get; set; }

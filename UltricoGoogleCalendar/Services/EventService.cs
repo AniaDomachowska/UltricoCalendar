@@ -28,7 +28,7 @@ namespace UltricoGoogleCalendar.Services
             eventRepository.Add(eventEntity);
             eventRepository.Commit();
 
-            // schedulerService.Schedule(mapper.Map<EventResource>(createModel));
+            schedulerService.Schedule(mapper.Map<EventResource>(createModel));
         }
 
         [Route("{id}")]
@@ -38,6 +38,8 @@ namespace UltricoGoogleCalendar.Services
             mapper.Map(updateModel, eventFromDb);
             eventRepository.Save(eventFromDb);
             eventRepository.Commit();
+
+            schedulerService.Schedule(mapper.Map<EventResource>(updateModel));
         }
 
         public IEnumerable<EventResource> GetAll()
