@@ -8,5 +8,6 @@ namespace UltricoGoogleCalendar.DataLayer.Repositories
         void Add(Event entity);
         void Save(Event entity);
         IEnumerable<Event> GetAll();
+        void Commit();
     }
 }

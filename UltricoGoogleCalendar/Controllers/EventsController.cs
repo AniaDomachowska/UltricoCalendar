@@ -22,7 +22,7 @@ namespace UltricoGoogleCalendar.Controllers
         }
 
         [HttpPost]
-        public OperationResult Create(EventCreateModel model)
+        public OperationResult Create([FromBody]EventCreateModel model)
         {
             eventService.Create(model);
 

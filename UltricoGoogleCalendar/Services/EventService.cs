@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using UltricoGoogleCalendar.DataLayer.Model;
 using UltricoGoogleCalendar.DataLayer.Repositories;
 using UltricoGoogleCalendar.Model;
@@ -18,16 +19,18 @@ namespace UltricoGoogleCalendar.Services
             this.mapper = mapper;
         }
 
-        public void Create(EventCreateModel createModel)
+        public void Create([FromBody]EventCreateModel createModel)
         {
             var eventEntity = mapper.Map<Event>(createModel);
             eventRepository.Add(eventEntity);
+            eventRepository.Commit();
         }
 
-        public void Update(EventUpdateModel createModel)
+        public void Update([FromBody]EventUpdateModel updateModel)
         {
-            var eventEntity = mapper.Map<Event>(createModel);
+            var eventEntity = mapper.Map<Event>(updateModel);
             eventRepository.Save(eventEntity);
+            eventRepository.Commit();
         }
 
         public IEnumerable<EventResource> GetAll()

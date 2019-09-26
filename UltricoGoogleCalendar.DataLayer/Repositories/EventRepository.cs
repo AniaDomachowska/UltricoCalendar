@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UltricoGoogleCalendar.DataLayer.Model;
 
@@ -7,20 +6,31 @@ namespace UltricoGoogleCalendar.DataLayer.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        List<Event> eventList = new List<Event>();
+        private readonly DatabaseContext dbContext;
+
+        public EventRepository(DatabaseContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
         public void Add(Event entity)
         {
-            eventList.Add(entity);
+            dbContext.Events.Add(entity);
         }
 
         public void Save(Event entity)
         {
+            dbContext.Events.Update(entity);
+        }
+
+        public void Commit()
+        {
+            dbContext.SaveChanges();
         }
 
         public IEnumerable<Event> GetAll()
         {
-            return eventList;
+            return dbContext.Events.ToList();
         }
     }
 }

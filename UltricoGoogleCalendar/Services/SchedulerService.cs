@@ -24,16 +24,22 @@ namespace UltricoGoogleCalendar.Services
 
         public void Schedule(EventResource model)
         {
+            var args = new EventScheduleArgs()
+            {
+                Email = "userEmail",
+                Event = model
+            };
+
             if (model.Schedule.ScheduleType == ScheduleTypeEnum.Daily)
             {
-                backgroundJobClient.Schedule<EventScheduleJob>(job => job.Execute(model), model.Schedule.Daily.AtTime);
+                backgroundJobClient.Schedule<EventScheduleJob>(job => job.Execute(args), model.Schedule.Daily.AtTime);
 
             } else { 
                 var cronResult = cronExpressionFactory.Generate(model.Schedule);
 
                 recurringJobManager.AddOrUpdate<EventScheduleJob>(
                     Guid.NewGuid().ToString(), 
-                    job => job.Execute(model), 
+                    job => job.Execute(args), 
                     cronResult.CronExpression);
             }
         }

@@ -12,7 +12,7 @@ namespace UltricoGoogleCalendar.DataLayer.Model
         public int AnnualRepeatOnMonth { get; set; }
         public int MonthlyRepeatOnDay { get; set; }
         public bool WeeklyRepeatNumberOfWeeks { get; set; }
-        public List<int> WeeklyRepeatOn { get; set; }
+        public string WeeklyRepeatOn { get; set; }
         public DateTime WeeklyStartDateTime { get; set; }
         public int WeeklyEndsAfterNoOfOccurrences { get; set; }
         public DateTime WeeklyEndDateTime { get; set; }

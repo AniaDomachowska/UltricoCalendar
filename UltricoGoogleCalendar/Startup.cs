@@ -1,14 +1,14 @@
-﻿using AutoMapper;
-using Hangfire;
+﻿using Hangfire;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UltricoGoogleCalendar.DataLayer.Model;
+using UltricoGoogleCalendar.DataLayer;
 using UltricoGoogleCalendar.DataLayer.Repositories;
-using UltricoGoogleCalendar.Model;
 using UltricoGoogleCalendar.Services;
 
 namespace UltricoGoogleCalendar
@@ -28,10 +28,14 @@ namespace UltricoGoogleCalendar
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddSingleton(AutoMapperConfig.Create());
-            services.AddHangfire(configuration => { configuration.UseMemoryStorage();});
+            services.AddHangfire(configuration => { configuration.UseMemoryStorage(); });
             services.AddHangfireServer();
             services.AddTransient<IEventService, EventService>();
-            services.AddTransient<IEventRepository, EventRepository>();
+            var databaseContext = new DatabaseContext();
+
+            databaseContext.Database.Migrate();
+            services.AddSingleton<IEventRepository>(new EventRepository(databaseContext));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
