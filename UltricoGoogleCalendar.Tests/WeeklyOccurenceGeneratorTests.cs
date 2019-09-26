@@ -58,7 +58,7 @@ namespace UltricoGoogleCalendar.Tests
             var result = sut.Create(eventEntity, occurenceFactoryParams);
 
             // Assert
-            result.Should().HaveCount((eventEntity.Schedule.EndDateTime- eventEntity.Schedule.StartDateTime).Value.Days);
+            result.Should().HaveCount((eventEntity.Schedule.EndDateTime- eventEntity.Schedule.StartDateTime).Value.Days + 1);
 
             result.Should().NotContain(element => element.Date < eventEntity.Schedule.StartDateTime
                                                   || element.Date > eventEntity.Schedule.EndDateTime);
