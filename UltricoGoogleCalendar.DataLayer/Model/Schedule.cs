@@ -12,9 +12,19 @@ namespace UltricoGoogleCalendar.DataLayer.Model
         public int AnnualRepeatOnMonth { get; set; }
         public int MonthlyRepeatOnDay { get; set; }
         public bool WeeklyRepeatNumberOfWeeks { get; set; }
-        public string WeeklyRepeatOn { get; set; }
-        public DateTime WeeklyStartDateTime { get; set; }
+
+        // Split the repeating flag into week days for query performance.
+        // (instead keeping it in string or other form that needs parsing)
+        public bool WeeklyRepeatOnMonday { get; set; }
+        public bool WeeklyRepeatOnTuesday { get; set; }
+        public bool WeeklyRepeatOnWednesday { get; set; }
+        public bool WeeklyRepeatOnThursday { get; set; }
+        public bool WeeklyRepeatOnFriday { get; set; }
+        public bool WeeklyRepeatOnSaturday { get; set; }
+        public bool WeeklyRepeatOnSunday { get; set; }
+
         public int WeeklyEndsAfterNoOfOccurrences { get; set; }
-        public DateTime WeeklyEndDateTime { get; set; }
+        public DateTime? EndDateTime { get; set; }
+        public DateTime? StartDateTime { get; set; }
     }
 }
