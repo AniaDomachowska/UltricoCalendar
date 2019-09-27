@@ -4,14 +4,13 @@ using FluentAssertions;
 using NUnit.Framework;
 using UltricoGoogleCalendar.Model;
 using UltricoGoogleCalendar.Services.OccurenceGenerator;
-using Xunit;
 
 namespace UltricoGoogleCalendar.Tests
 {
     public class WeeklyOccurenceGeneratorTests
     {
         [Test]
-        public void WeeklyOccurenceGenerator_For_Whole_Week_Returns_Every_Day_Occurence()
+        public void Generate_For_Whole_Week_Returns_Occurence_For_Every_Day()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -43,7 +42,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Event_That_Has_Start_And_End_Date_Returns_Every_Day_Occurence()
+        public void Generate_For_Event_That_Has_Start_And_End_Date_Returns_Every_Day_Occurence()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -65,7 +64,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Mondays()
+        public void Generate_For_Monday_Returns_Mondays()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -83,7 +82,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Tuesdays()
+        public void Generate_For_Monday_Returns_Tuesdays()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -101,7 +100,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Wednesdays()
+        public void Generate_For_Monday_Returns_Wednesdays()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -119,7 +118,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Thursdays()
+        public void Generate_For_Monday_Returns_Thursdays()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -137,7 +136,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Friday()
+        public void Generate_For_Monday_Returns_Friday()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -155,7 +154,7 @@ namespace UltricoGoogleCalendar.Tests
         }
 
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Saturday()
+        public void Generate_For_Monday_Returns_Saturday()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -172,8 +171,16 @@ namespace UltricoGoogleCalendar.Tests
             ValidateForDay(occurenceFactoryParams, result, DayOfWeek.Saturday, true);
         }
 
+
+
         [Test]
-        public void WeeklyOccurenceGenerator_For_Monday_Returns_Sunday()
+        public void Generate_For_Empty_Schedule_Returns_NoOccurrences()
+        {
+
+        }
+
+        [Test]
+        public void Generate_For_Monday_Returns_Sunday()
         {
             // Arrange
             var sut = new WeeklyOccurenceFactory();
@@ -188,6 +195,12 @@ namespace UltricoGoogleCalendar.Tests
 
             // Assert
             ValidateForDay(occurenceFactoryParams, result, DayOfWeek.Sunday, true);
+        }
+
+        [Test]
+        public void Generate_For_Exceeded_Number_Of_Occurences_In_Event_Dont_Return_Anything()
+        {
+
         }
 
         private static OccurenceFactoryParams CreateFactoryParams(
