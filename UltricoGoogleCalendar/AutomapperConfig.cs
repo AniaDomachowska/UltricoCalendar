@@ -15,6 +15,11 @@ namespace UltricoGoogleCalendar
                     .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
 
+                cfg.CreateMap<EventCreateModel, EventResource>()
+                    .ForMember(dest => dest.Schedule, opt => opt.MapFrom(src => src.Schedule))
+                    .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                    .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
                 cfg.CreateMap<EventUpdateModel, Event>()
                     .ForMember(dest => dest.Schedule, opt => opt.MapFrom(src => src.Schedule))
                     .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))

@@ -9,8 +9,8 @@ using UltricoGoogleCalendar.DataLayer;
 namespace UltricoGoogleCalendar.DataLayer.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190926195756_Initial")]
-    partial class Initial
+    [Migration("20190927070511_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,6 +37,8 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
 
                     b.Property<DateTime>("Updated");
 
+                    b.Property<bool>("WholeDayEvent");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ParentEventId");
@@ -59,21 +61,33 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
 
                     b.Property<DateTime>("DailyAtTime");
 
+                    b.Property<DateTime?>("EndDateTime");
+
                     b.Property<int>("MonthlyRepeatOnDay");
 
                     b.Property<int>("ScheduleType");
 
-                    b.Property<DateTime>("Updated");
+                    b.Property<DateTime?>("StartDateTime");
 
-                    b.Property<DateTime>("WeeklyEndDateTime");
+                    b.Property<DateTime>("Updated");
 
                     b.Property<int>("WeeklyEndsAfterNoOfOccurrences");
 
                     b.Property<bool>("WeeklyRepeatNumberOfWeeks");
 
-                    b.Property<string>("WeeklyRepeatOn");
+                    b.Property<bool>("WeeklyRepeatOnFriday");
 
-                    b.Property<DateTime>("WeeklyStartDateTime");
+                    b.Property<bool>("WeeklyRepeatOnMonday");
+
+                    b.Property<bool>("WeeklyRepeatOnSaturday");
+
+                    b.Property<bool>("WeeklyRepeatOnSunday");
+
+                    b.Property<bool>("WeeklyRepeatOnThursday");
+
+                    b.Property<bool>("WeeklyRepeatOnTuesday");
+
+                    b.Property<bool>("WeeklyRepeatOnWednesday");
 
                     b.HasKey("Id");
 

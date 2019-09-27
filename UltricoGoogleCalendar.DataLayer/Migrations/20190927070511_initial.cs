@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UltricoGoogleCalendar.DataLayer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,10 +21,16 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
                     AnnualRepeatOnMonth = table.Column<int>(nullable: false),
                     MonthlyRepeatOnDay = table.Column<int>(nullable: false),
                     WeeklyRepeatNumberOfWeeks = table.Column<bool>(nullable: false),
-                    WeeklyRepeatOn = table.Column<string>(nullable: true),
-                    WeeklyStartDateTime = table.Column<DateTime>(nullable: false),
+                    WeeklyRepeatOnMonday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnTuesday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnWednesday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnThursday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnFriday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnSaturday = table.Column<bool>(nullable: false),
+                    WeeklyRepeatOnSunday = table.Column<bool>(nullable: false),
                     WeeklyEndsAfterNoOfOccurrences = table.Column<int>(nullable: false),
-                    WeeklyEndDateTime = table.Column<DateTime>(nullable: false)
+                    EndDateTime = table.Column<DateTime>(nullable: true),
+                    StartDateTime = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,6 +47,7 @@ namespace UltricoGoogleCalendar.DataLayer.Migrations
                     Updated = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    WholeDayEvent = table.Column<bool>(nullable: false),
                     ScheduleId = table.Column<int>(nullable: true),
                     ParentEventId = table.Column<int>(nullable: true),
                     OccurenceId = table.Column<Guid>(nullable: false)
